@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content="Brand IT Solution - Professional IT Services and Digital Solutions" />
+		<meta name="keywords" content="IT Services, Web Development, Digital Solutions, Technology Consulting" />
+		<meta name="author" content="Brand IT Solution" />
+		
+		<!-- Optimized Google Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789" rel="stylesheet">
+		
+		<!-- Preload critical resources -->
+		<link rel="preload" href="/src/app.css" as="style">
+		<link rel="preload" href="/src/lib/components/Hero.svelte" as="fetch" crossorigin>
+		
+		<!-- DNS prefetch for better performance -->
+		<link rel="dns-prefetch" href="//fonts.googleapis.com">
+		<link rel="dns-prefetch" href="//fonts.gstatic.com">
+		
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website">
+		<meta property="og:url" content="https://brandit.com/">
+		<meta property="og:title" content="Brand IT Solution - Professional IT Services">
+		<meta property="og:description" content="Transform your business with our cutting-edge IT solutions and digital services.">
+		<meta property="og:image" content="%sveltekit.assets%/og-image.jpg">
+
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image">
+		<meta property="twitter:url" content="https://brandit.com/">
+		<meta property="twitter:title" content="Brand IT Solution - Professional IT Services">
+		<meta property="twitter:description" content="Transform your business with our cutting-edge IT solutions and digital services.">
+		<meta property="twitter:image" content="%sveltekit.assets%/og-image.jpg">
+		
+		%sveltekit.head%
+	</head>
+	<body data-sveltekit-preload-data="hover" class="bg-white text-gray-900 font-sans">
+		<div style="display: contents">%sveltekit.body%</div>
+	</body>
+</html>
