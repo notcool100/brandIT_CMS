@@ -2,11 +2,9 @@ trigger:
   branches:
     include:
       - main
-      - develop
   paths:
     include:
-      - fe/*
-      - be/*
+      - frontend/*
 
 pool:
   name: 'Astro'
@@ -62,8 +60,7 @@ stages:
   displayName: 'Deploy to Development'
   dependsOn: 
     - BuildFrontend
-    - BuildBackend
-  condition: and(succeeded('BuildFrontend'), succeeded('BuildBackend'), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
+  condition: and(succeeded('BuildFrontend'),  eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
   jobs:
   - job: DeployFrontendDev
     displayName: 'Deploy Frontend to Dev'
