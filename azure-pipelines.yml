@@ -60,7 +60,6 @@ stages:
   displayName: 'Deploy to Development'
   dependsOn: 
     - BuildFrontend
-  condition: and(succeeded('BuildFrontend'),  eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
   jobs:
   - job: DeployFrontendDev
     displayName: 'Deploy Frontend to Dev'
