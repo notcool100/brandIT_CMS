@@ -43,7 +43,7 @@ stages:
     
     - task: ArchiveFiles@2
       inputs:
-        rootFolderOrFile: 'cms_frontend'
+        rootFolderOrFile: 'frontend'
         includeRootFolder: false
         archiveType: 'tar'
         tarCompression: 'gz'
@@ -68,7 +68,7 @@ stages:
       inputs:
         buildType: 'current'
         downloadType: 'single'
-        artifactName: 'frontend'
+        artifactName: 'cms_frontend'
         downloadPath: '$(System.ArtifactsDirectory)'
 
     - script: |
@@ -81,7 +81,7 @@ stages:
          
          # Extract to temporary directory first
          tar -xzf $(System.ArtifactsDirectory)/cms_frontend/cms_frontend.tar.gz -C $TEMP_DIR
-         
+     
          # Ensure target directory exists with proper permissions
          mkdir -p /var/www/cms/frontend-dev
          
