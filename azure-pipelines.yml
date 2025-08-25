@@ -53,14 +53,13 @@ stages:
     - task: PublishBuildArtifacts@1
       inputs:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)/cms_frontend.tar.gz'
-        ArtifactName: 'frontend'
+        ArtifactName: 'cms_frontend'
         publishLocation: 'Container'
 
 - stage: DeployDev
   displayName: 'Deploy to Development'
   dependsOn: 
     - BuildFrontend
-  condition: and(succeeded('BuildFrontend'),  eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
   jobs:
   - job: DeployFrontendDev
     displayName: 'Deploy Frontend to Dev'
@@ -69,7 +68,7 @@ stages:
       inputs:
         buildType: 'current'
         downloadType: 'single'
-        artifactName: 'frontend'
+        artifactName: 'cms_frontend'
         downloadPath: '$(System.ArtifactsDirectory)'
 
     - script: |
@@ -81,8 +80,8 @@ stages:
          echo "Created temporary directory: $TEMP_DIR"
          
          # Extract to temporary directory first
-         tar -xzf $(System.ArtifactsDirectory)/cms/frontend/frontend.tar.gz -C $TEMP_DIR
-         
+         tar -xzf $(System.ArtifactsDirectory)/cms_frontend/cms_frontend.tar.gz -C $TEMP_DIR
+     
          # Ensure target directory exists with proper permissions
          mkdir -p /var/www/cms/frontend-dev
          
