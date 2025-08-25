@@ -43,7 +43,7 @@ stages:
     
     - task: ArchiveFiles@2
       inputs:
-        rootFolderOrFile: 'frontend'
+        rootFolderOrFile: 'cms_frontend'
         includeRootFolder: false
         archiveType: 'tar'
         tarCompression: 'gz'
@@ -53,7 +53,7 @@ stages:
     - task: PublishBuildArtifacts@1
       inputs:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)/cms_frontend.tar.gz'
-        ArtifactName: 'frontend'
+        ArtifactName: 'cms_frontend'
         publishLocation: 'Container'
 
 - stage: DeployDev
@@ -80,7 +80,7 @@ stages:
          echo "Created temporary directory: $TEMP_DIR"
          
          # Extract to temporary directory first
-         tar -xzf $(System.ArtifactsDirectory)/cms_frontend.tar.gz -C $TEMP_DIR
+         tar -xzf $(System.ArtifactsDirectory)/cms_frontend/cms_frontend.tar.gz -C $TEMP_DIR
          
          # Ensure target directory exists with proper permissions
          mkdir -p /var/www/cms/frontend-dev
