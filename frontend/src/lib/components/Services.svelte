@@ -134,6 +134,7 @@
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
       {#each services as service, index}
         <div 
+          role="article"
           class="group relative bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-100 dark:border-gray-700 stagger-item card-3d {isVisible ? 'animate-fadeInScale' : 'opacity-0'} transition-colors duration-300"
           style="animation-delay: {index * 0.15}s;"
           on:mousemove={(e) => handleMouseMove(e, e.currentTarget)}

@@ -106,14 +106,25 @@
             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <Lock size={20} class="text-gray-300" />
             </div>
-            <input
-              id="password"
-              type={showPassword ? 'text' : 'password'}
-              bind:value={password}
-              required
-              class="w-full pl-10 pr-12 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-300 focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all duration-300"
-              placeholder="Enter your password"
-            />
+            {#if showPassword}
+              <input
+                id="password"
+                type="text"
+                bind:value={password}
+                required
+                class="w-full pl-10 pr-12 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-300 focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all duration-300"
+                placeholder="Enter your password"
+              />
+            {:else}
+              <input
+                id="password"
+                type="password"
+                bind:value={password}
+                required
+                class="w-full pl-10 pr-12 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-300 focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all duration-300"
+                placeholder="Enter your password"
+              />
+            {/if}
             <button
               type="button"
               on:click={togglePasswordVisibility}

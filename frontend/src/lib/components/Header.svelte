@@ -80,6 +80,7 @@
               
               <!-- Dropdown Menu -->
               <div 
+                role="menu"
                 class="absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transform translate-y-2 group-hover:translate-y-0 transition-all duration-300 ease-out"
                 on:mouseenter={() => isServicesOpen = true}
                 on:mouseleave={() => isServicesOpen = false}

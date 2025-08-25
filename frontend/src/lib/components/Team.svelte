@@ -145,6 +145,7 @@
       {#each teamMembers as member, index}
                 <!-- Professional 3D Flip Card Container -->
         <div
+          role="article"
           class="group perspective-1000 h-96 cursor-pointer {isVisible ? 'animate-fade-in-up' : 'opacity-0'}"
           style="animation-delay: {index * 0.1}s;"
           on:mousemove={(e) => handleMouseMove(e, e.currentTarget)}
