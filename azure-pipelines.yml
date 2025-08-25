@@ -80,7 +80,7 @@ stages:
          echo "Created temporary directory: $TEMP_DIR"
          
          # Extract to temporary directory first
-         tar -xzf $(System.ArtifactsDirectory)/cms/frontend/frontend.tar.gz -C $TEMP_DIR
+         tar -xzf $(System.ArtifactsDirectory)/cms_frontend.tar.gz -C $TEMP_DIR
          
          # Ensure target directory exists with proper permissions
          mkdir -p /var/www/cms/frontend-dev
