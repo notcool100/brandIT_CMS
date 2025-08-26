@@ -17,7 +17,7 @@ stages:
   displayName: 'Build Frontend'
   jobs:
   - job: BuildFrontendJob
-    displayName: 'Build svelte.js App'
+    displayName: 'Build SvelteKit App'
     steps:
     - task: NodeTool@0
       inputs:
@@ -26,20 +26,21 @@ stages:
     
     - script: |
         cd frontend
-        npm install --legacy-peer-deps
+        corepack enable
+        pnpm install
       displayName: 'Install Frontend Dependencies'
     
     - script: |
         cd frontend
-        echo "Running TypeScript check with skipLibCheck flag"
-        npm run type-check || true
-      displayName: 'Run TypeScript Check (Non-blocking)'
+        echo "Running SvelteKit check"
+        pnpm run check || true
+      displayName: 'Run SvelteKit Check (Non-blocking)'
     
     - script: |
         cd frontend
-        echo "Building frontend application with TypeScript errors ignored"
-        NODE_OPTIONS=--max_old_space_size=4096 npm run build
-      displayName: 'Build Frontend Application'
+        echo "Building SvelteKit application"
+        NODE_OPTIONS=--max_old_space_size=4096 pnpm run build
+      displayName: 'Build SvelteKit Application'
     
     - task: ArchiveFiles@2
       inputs:
@@ -85,13 +86,13 @@ stages:
          # Ensure target directory exists with proper permissions
          mkdir -p /var/www/cms/frontend-dev
          
-         # Remove existing .next directory if it exists to avoid permission issues
-         if [ -d "/var/www/cms/frontend-dev/.next" ]; then
-           rm -rf /var/www/cms/frontend-dev/.next
+         # Remove existing build directory if it exists to avoid permission issues
+         if [ -d "/var/www/cms/frontend-dev/build" ]; then
+           rm -rf /var/www/cms/frontend-dev/build
          fi
-         
+        
          # Copy files from temp directory to target directory
-         rsync -av --exclude='.next/cache' $TEMP_DIR/ /var/www/cms/frontend-dev/
+         rsync -av $TEMP_DIR/ /var/www/cms/frontend-dev/
          
          # Clean up temporary directory
          rm -rf $TEMP_DIR
@@ -106,7 +107,7 @@ stages:
           export PATH=$PATH:/home/azureagent/.nvm/versions/node/v24.4.1/bin
           export PM2_HOME=/home/azureagent/.pm2
           cd /var/www/cms/frontend-dev
-          pm2 restart cms-frontend-dev || pm2 start npm --name "cms-frontend-dev" --cwd /var/www/cms/frontend-dev -- start
+          pm2 restart cms-frontend-dev || pm2 start pnpm --name "cms-frontend-dev" --cwd /var/www/cms/frontend-dev -- start
           pm2 save
         else
           # We need to use a different approach since sudo is not available
